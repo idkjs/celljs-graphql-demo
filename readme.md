@@ -1,15 +1,9 @@
-# Build Pipeline for hyperx
+# Testing How to Render GraphQL Query Responses with Celljs.org
 
-- note: uglify-js
-- note: just learn about `$(npm bin)`. See: https://docs.npmjs.com/cli/bin
-- i had to install uglify-js -g, not locally, for the build command in the example to run.
+It works.
 
-- buid command for browserify is:
+To run, download and open index.html. That's it. 
 
-```js
-$(npm bin)/browserify \
-  -t babelify \
-  -g uglifyify \
-  -p bundle-collapser/plugin index.js | uglifyjs > bundle.js
+If you want to make changes to index.js, run browserify on it.
+`browserify index.js > bundle.js`
 
-```
