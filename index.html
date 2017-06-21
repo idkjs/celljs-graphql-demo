@@ -1,0 +1,59 @@
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://www.celljs.org/cell.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
+
+    <script src="./bundle.js"></script>
+</head>
+
+<script>
+    var App = {
+        $cell: true,
+        _items: [],
+        $init: function() {
+            this._query();
+        }, // use _ to define data and ()'s on elements
+        _query: function() {
+            _getItems()
+                .then(function(res) {
+                    // transform array to clean up
+                    const results = res.map(function(item) {
+                            // console.log(item.node.name, item.node.review_count)
+                            return ({
+                                name: item.node.name,
+                                review_count: item.node.review_count
+                            })
+                        })
+                        // console.log(results)
+                        // console.log(results[0])
+
+                    this._refresh(results);
+                }.bind(this));
+        },
+        _refresh: function(results) {
+            this._items = results;
+        },
+        _template: function(item) {
+            return {
+                $components: [{
+                    $text: item.name
+                }, {
+                    content: item.review_count ? item.review_count : ""
+                }]
+            };
+        },
+        $update: function() {
+            this.$components = this._items.map(this._template)
+        }
+    }
+</script>
+
+
+<script src="./bundle.js"></script>
+
+
+</html>
